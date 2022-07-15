@@ -1,5 +1,3 @@
-import adapter from 'webrtc-adapter';
-
 (function() {
 
   // Define "global" variables
