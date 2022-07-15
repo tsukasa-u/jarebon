@@ -32,10 +32,6 @@ import adapter from 'webrtc-adapter';
     connectButton.addEventListener('click', connectPeers, false);
     disconnectButton.addEventListener('click', disconnectPeers, false);
     sendButton.addEventListener('click', sendMessage, false);
-
-    // temp = new RTCIceCandidate();
-    // console.log(temp.address);
-
   }
   
   // Connect the two peers. Normally you look for and connect to a remote
