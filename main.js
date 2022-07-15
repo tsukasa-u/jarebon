@@ -33,8 +33,8 @@ import adapter from 'webrtc-adapter';
     disconnectButton.addEventListener('click', disconnectPeers, false);
     sendButton.addEventListener('click', sendMessage, false);
 
-    temp = new RTCIceCandidate();
-    console.log(temp.address);
+    // temp = new RTCIceCandidate();
+    // console.log(temp.address);
 
   }
   
