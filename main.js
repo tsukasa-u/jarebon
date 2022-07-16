@@ -41,7 +41,7 @@
     
     localConnection = new RTCPeerConnection();
     
-    pc1.onicecandidate = onIceCandidate1;
+    localConnection.onicecandidate = onIceCandidate1;
  
 function onIceCandidate1(evt) {
   console.log(ext);
