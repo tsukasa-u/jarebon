@@ -4,4 +4,5 @@
 https://tsukasa-u.github.io/jarebon/
 
 # MEMO
-WebRTC
+https://webrtc.github.io/samples/
+https://codelabs.developers.google.com/codelabs/webrtc-web/#0
