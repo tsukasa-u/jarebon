@@ -30,9 +30,6 @@
     connectButton.addEventListener('click', connectPeers, false);
     disconnectButton.addEventListener('click', disconnectPeers, false);
     sendButton.addEventListener('click', sendMessage, false);
-
-    temp = new RTCIceCandidate().address;
-    console.log(temp);
   }
   
   // Connect the two peers. Normally you look for and connect to a remote
