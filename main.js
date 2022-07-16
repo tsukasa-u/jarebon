@@ -41,6 +41,15 @@
     
     localConnection = new RTCPeerConnection();
     
+    pc1.onicecandidate = onIceCandidate1;
+ 
+function onIceCandidate1(evt) {
+  console.log(ext);
+  if (evt.candidate) {
+    // pc2.addIceCandidate(new RTCIceCandidate(evt.candidate));
+  }
+}
+    
     // Create the data channel and establish its event listeners
     sendChannel = localConnection.createDataChannel("sendChannel");
     sendChannel.onopen = handleSendChannelStatusChange;
