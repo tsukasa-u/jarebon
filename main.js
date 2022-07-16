@@ -41,15 +41,6 @@
     
     localConnection = new RTCPeerConnection();
     
-    localConnection.onicecandidate = onIceCandidate1;
- 
-function onIceCandidate1(evt) {
-  console.log(ext);
-  if (evt.candidate) {
-    // pc2.addIceCandidate(new RTCIceCandidate(evt.candidate));
-  }
-}
-    
     // Create the data channel and establish its event listeners
     sendChannel = localConnection.createDataChannel("sendChannel");
     sendChannel.onopen = handleSendChannelStatusChange;
@@ -62,14 +53,25 @@ function onIceCandidate1(evt) {
     
     // Set up the ICE candidates for the two peers
     
-    localConnection.onicecandidate = e => !e.candidate
-        || remoteConnection.addIceCandidate(e.candidate)
-        .catch(handleAddCandidateError);
+    // localConnection.onicecandidate = e => !e.candidate
+    //     || remoteConnection.addIceCandidate(e.candidate)
+    //     .catch(handleAddCandidateError);
 
-    remoteConnection.onicecandidate = e => !e.candidate
-        || localConnection.addIceCandidate(e.candidate)
-        .catch(handleAddCandidateError);
+    // remoteConnection.onicecandidate = e => !e.candidate
+    //     || localConnection.addIceCandidate(e.candidate)
+    //     .catch(handleAddCandidateError);
     
+    localConnection.onicecandidate = icecandidatelog1;
+
+    function icecandidatelog1(e) {
+      console.log(e);
+    }
+
+    remoteConnection.onicecandidate = icecandidatelog2;
+
+    function icecandidatelog2(e) {
+      console.log(e);
+    }
     // Now create an offer to connect; this starts the process
     
     localConnection.createOffer()
