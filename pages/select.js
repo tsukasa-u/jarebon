@@ -1,13 +1,16 @@
 import Link from 'next/link'
+import {loginName} from "../js/global.js"
 
-function room() {
+function select() {
   return (
     <>
       <div>
+        <p>username : {loginName}</p>
         <Link href="/search">
           <button type="button">search room</button>
         </Link>
         
+        {/* <Link href="/room/1"> */}
         <Link href="/create">
           <button type="button">create room</button>
         </Link>
@@ -16,4 +19,4 @@ function room() {
   )
 }
 
-export default room
+export default select;

@@ -1,8 +1,9 @@
 function search() {
+
   return (
     <>
       <div>
-        <p>create</p>
+        <p>search</p>
       </div>
     </>
   )
