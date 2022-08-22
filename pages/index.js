@@ -8,36 +8,47 @@ import { useRouter } from 'next/router';
 const channel = new BroadcastChannel('my_bus');
 
 // Listen for messages on "my_bus".
+
 channel.onmessage = function(e) {
-  console.log('Received', e, "gg");
+  const json_data = JSON.parse(e);
+  // console.log('Received', e, "gg");
 };
-
-const Index = () => {
-
-// Send a message on "my_bus".
-channel.postMessage('This is a test message.');
-
 
 // Close the channel when you're done.
 // channel.close();
+
+const Index = () => {
+
   const router = useRouter();
 
   const loginClick = e => {
     e.preventDefault();
-    console.log("login");
-    router.push("/room");
+    
+    // Send a message on "my_bus".
+    let loginName = document.getElementById("loginForm").value;
+    if (loginName) {
+      var loginData = {
+        "userName": loginName,
+        "state": "enter"
+      }
+      channel.postMessage(JSON.stringify(loginData));
+  
+      // console.log(JSON.stringify(loginData));
+      router.push("/room");
+    }
   };
 
   return (
     <>
       <Head>
-        {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css" crossorigin="anonymous"></link> */}
-        {/* <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js" crossorigin="anonymous"></script> */}
+        <title>
+          Login
+        </title>
       </Head>
       {/* <Script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js"/> */}
       <div>Login Page</div>
       <form>
-        <input></input>
+        <input id="loginForm"></input>
         <button type='button' onClick={loginClick}>
           LOGIN
         </button>

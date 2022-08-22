@@ -1,8 +1,18 @@
+import Link from 'next/link'
+
 function room() {
   return (
-    <div>
-      <p>This is the sample page</p>
-    </div>
+    <>
+      <div>
+        <Link href="/search">
+          <button type="button">search room</button>
+        </Link>
+        
+        <Link href="/create">
+          <button type="button">create room</button>
+        </Link>
+      </div>
+    </>
   )
 }
 
