@@ -3,9 +3,10 @@ import { BroadcastChannel } from 'broadcast-channel';
 import Head from 'next/head';
 import Script from 'next/script'
 import { useRouter } from 'next/router';
-import {loginName} from"../js/global.js"
+import {loginName, setLoginName, setSavedHashedPid} from "../js/global.js"
 import {broadcastData} from "../js/broadcast.js"
 import React, { useState, useEffect } from 'react';
+import { BrowserFingerprint } from "browser_fingerprint";
 
 // channel.close();
 
@@ -16,7 +17,24 @@ const Index = () => {
   const loginClick = e => {
     e.preventDefault();
     
-    loginName  = document.getElementById("loginForm").value;
+    setLoginName(document.getElementById("loginForm").value);
+    console.log(loginName);
+
+    const options = {
+      cookieKey: "__browser_fingerprint",
+      toSetCookie: true,
+      onlyStaticElements: true,
+      settings: {
+        path: "/",
+        expires: 3600000,
+        httpOnly: null,
+      },
+    };
+    
+    const fingerPrinter = new BrowserFingerprint(options);
+    setSavedHashedPid(fingerPrinter.savedHashedPid);
+    // console.log(fingerPrinter.savedHashedPid);
+
     if (loginName) {
       var loginData = {
         "userName": loginName,

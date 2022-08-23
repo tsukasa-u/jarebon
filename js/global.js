@@ -1,13 +1,33 @@
-var loginName = "";
+export var loginName = "";
 
-var groupInfo = {
-    "roomName": "",
-    "member": [],
-    "main": ""
+export const setLoginName = (value) => {
+    loginName = value;
 }
 
-var groupsInfo = {
-    
+export  var  groupInfo = {
+    roomName: "",
+    member: [],
+    main: "",
+    pid: ""
+};
+
+export const setGroupInfo = (value) => {
+    groupInfo = value;
 }
 
-export default {loginName, groupInfo};
+export var groupsInfo = [{}];
+
+export const setGroupsInfo = (value) => {
+    groupsInfo.push(value);
+}
+
+export const deleteGroupsInfo = (value) => {
+    groupsInfo.delete(value);
+}
+
+export var savedHashedPid;
+
+export const setSavedHashedPid = (value) => {
+    savedHashedPid = value;
+}
+
