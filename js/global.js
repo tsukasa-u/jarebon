@@ -1,3 +1,9 @@
+import { opChannel } from './webRTC.js';
+
+export const last = (array) => array[array?.length-1];
+
+export let webRTC_channel = new opChannel();
+
 export var loginName = "";
 
 export const setLoginName = (value) => {
