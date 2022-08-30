@@ -21,7 +21,7 @@ export const setGroupInfo = (value) => {
     groupInfo = value;
 }
 
-export var groupsInfo = [{}];
+export var groupsInfo = [];
 
 export const setGroupsInfo = (value) => {
     groupsInfo.push(value);
@@ -29,6 +29,12 @@ export const setGroupsInfo = (value) => {
 
 export const deleteGroupsInfo = (value) => {
     groupsInfo.delete(value);
+}
+
+export const filterPidGroupsInfo = (value) => {
+    groupsInfo.filter = groupsInfo.filter((i) => {
+        i.pid !== value
+    })
 }
 
 export var savedHashedPid;

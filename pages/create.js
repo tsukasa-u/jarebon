@@ -1,10 +1,22 @@
 import {loginName, setGroupInfo, savedHashedPid} from "../js/global.js"
 import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react'
 
 function create() {
   console.log(loginName);
 
   const router = useRouter();
+  useEffect(() => {
+    router.beforePopState(({ url, as, options }) => {
+
+      if (as !== '/select' && !as.match(/room/)) {
+        window.location.href = "/error";
+        return false;
+      }
+
+      return true;
+    })
+  }, []);
   
   const createClick = e => {
     e.preventDefault();

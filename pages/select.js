@@ -1,7 +1,23 @@
 import Link from 'next/link'
 import {loginName} from "../js/global.js"
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 function select() {
+
+  const router = useRouter();
+  useEffect(() => {
+    router.beforePopState(({ url, as, options }) => {
+
+      if (as !== '/search' && as !== '/create' && as !== '/') {
+        window.location.href = "/error";
+        return false;
+      }
+
+      return true;
+    })
+  }, []);
+
   return (
     <>
       <div>

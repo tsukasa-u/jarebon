@@ -1,5 +1,5 @@
 import { BroadcastChannel } from 'broadcast-channel';
-import { webRTC_channel, last, loginName, groupInfo, setGroupsInfo, savedHashedPid } from "./global.js"
+import { webRTC_channel, last, loginName, groupInfo, setGroupsInfo, filterPidGroupsInfo, savedHashedPid } from "./global.js"
 
 var channel = new BroadcastChannel('jarebon_bus');
 
@@ -20,9 +20,13 @@ channel.onmessage = function(e) {
         }
         if (json_data.state == "offer") {
             if (json_data.roomName == groupInfo.roomName) {
-                let answer = webRTC_channel.addRemoteChannel()
-                    .answerPeers()
-                    .answerOffer();
+                let answer = new Promise((resolve, reject) => resolve(webRTC_channel.addRemoteChannel()))
+                .then((ch) => new Promise((resolve, reject) => resolve(ch.answerPeers())))
+                .then((ch) => new Promise((resolve, reject) => resolve(ch.answerOffer())))
+                .catch((err) => console.log(err));
+                // let answer = webRTC_channel.addRemoteChannel()
+                //     .answerPeers()
+                //     .answerOffer();
                 var tmp = {
                     userName : groupInfo.main,
                     roomName : groupInfo.roomName,
@@ -36,6 +40,9 @@ channel.onmessage = function(e) {
         if (json_data.state == "reenter") {
             setGroupsInfo({roomName: json_data.roomName, NumOfMember: json_data.NumOfMember, pid:json_data.pid});
         }
+        if (json_data.state == "out") {
+            filterPidGroupsInfo(json_data.pid);
+        }
         if (json_data.state == "answer") {
             if (json_data.roomName == groupInfo.roomName) {
                 last(webRTC_channel.localChannel).setAnswer();
@@ -48,4 +55,14 @@ channel.onmessage = function(e) {
 
 export function broadcastData(str) {
     channel.postMessage(str);
+}
+
+export function outRoom() {
+    var tmp = {
+        userName : groupInfo.main,
+        roomName : groupInfo.roomName,
+        pid : groupInfo.pid,
+        state : "out"
+    }
+    broadcastData(JSON.stringify(tmp));
 }
